@@ -52,7 +52,20 @@ class VendorController extends BaseController
     }
     public function dashboard(Request $request) {
         if ($request->session()->has('email')){
-            return view('dashboard');
+            // $email = $request->session()->get('email');
+
+            $users = VendorModel::where('user_Email', $request->session()->get('email'));
+            $login_user = $users->first();
+            if($login_user && $login_user->exists()){
+                $name = $login_user->user_Name;
+                $email = $login_user->user_Email;
+                return view('dashboard', ['email' => $email, 'name' => $name]);
+            }
+
+            else
+                return redirect('dashboard');
+
+  
         }
     
         else 

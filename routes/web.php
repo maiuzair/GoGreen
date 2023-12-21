@@ -13,12 +13,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// GET METHODS
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/index', function () {
     return view('index');
+});
+
+Route::get('/whyplants', function () {
+    return view('whyplants');
+});
+Route::get('/buy', function () {
+    return view('buy');
+});
+
+Route::get('/signup', function () {
+    return view('signup');
 });
 
 Route::get('/login', function () {
@@ -27,13 +44,7 @@ Route::get('/login', function () {
 
 Route::post('/login', '\App\Http\Controllers\VendorController@login');
 
-
-
 Route::get('/dashboard', '\App\Http\Controllers\VendorController@dashboard');
-
-Route::get('/signup', function () {
-    return view('signup');
-});
 
 Route::post('/signup', '\App\Http\Controllers\VendorController@store');
 
