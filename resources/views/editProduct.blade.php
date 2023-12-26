@@ -11,21 +11,12 @@
     <title>Products</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
-
-
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-
-    {{-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-
-    <!-- Custom styles for this template -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    {{-- <link href="styles/styles.css" rel="stylesheet">
-    <link href="/styles/dashboard.css" rel="stylesheet"> --}}
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/styles.css') }}"> <!--for the navbar and footer-->
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/dashboard.css') }}">
 </head>
@@ -132,7 +123,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/products">
                                     <svg class="bi" width="20px" height="20px">
                                         <use xlink:href="#cart" />
                                     </svg>
@@ -184,55 +175,56 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Products</h1>
-                    <button type="button" class="btn btn-sm btn-outline-secondary"
-                        onclick="window.location.href='/addProduct'">Add product</button>
+                    <h1 class="h2">Edit Product</h1>
                 </div>
-                @if (session('message'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('message') }}
-                    </div>
-                @endif
 
-
-                <!-- =============================================================here -->
-                <div class="album py-5 bg-body-tertiary">
-                    <div class="container">
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                            @foreach ($products as $product)
-                                <div class="col">
-                                    <div class="card shadow-sm">
-                                        <img class="bd-placeholder-img card-img-top" width="100%" height="300"
-                                            src="{{ asset($product->MainImage) }}" alt="Product image" />
-
-                                        <div class="card-body">
-                                            <p class="card-text">{{ $product->Name }}</p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <form action="{{ route('deleteProduct', $product->id) }}"method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <div class="btn-group">
-                                                        <button type="button" onclick="window.location.href='{{ route('editProduct', $product->id) }}'"
-                                                            href="{{ route('editProduct', $product->id) }}"
-                                                            class="btn btn-sm btn-outline-secondary">Edit</button>
-                                                        <button type="submit"
-                                                            class="btn btn-sm btn-outline-secondary">Delete</button>
-                                                    </div>
-                                                </form>
-
-                                                <small class="text-body-secondary">{{ $product->Price }}$ |
-                                                    {{ $product->Quantity }} in stock</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                <div class="col">
+                    <form action="{{ route('editProduct.post', $product->id) }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="productName" class="form-label">Product Name:</label>
+                            <input type="text" class="form-control" id="productName" name="productName" value="{{ $product->Name }}" required>" required>
                         </div>
-                    </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description" rows="4" value="{{ $product->Description }}" ></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price" min="0.01" value="{{ $product->Price }}" step="0.01" required>
+                                
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Quantity:</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity"
+                                value="{{ $product->Quantity }}" min="1" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category:</label>
+                            <input type="text" class="form-control" id="category" name="category" value="{{ $product->Category }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="mainImage" class="form-label">Main Image:</label>
+                            <img src="{{ asset($product->MainImage) }}" alt="Main Image" width="100" height="100">
+                            <input type="file" class="form-control" id="mainImage" name="mainImage"
+                                accept="image/*" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="otherImages" class="form-label">Other Images:</label>
+                            <input type="file" class="form-control" id="otherImages" name="otherImages[]"
+                                accept="image/*" multiple>
+                        </div>
+
+                        <button type="submit" value="submit" class="btn btn-primary">Add Product</button>
+
+                    </form>
                 </div>
-                <!-- =============================================================to here -->
-
-
             </main>
         </div>
     </div>

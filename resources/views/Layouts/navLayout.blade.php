@@ -52,3 +52,17 @@
     </nav>
 @endsection
 
+
+@section('adminNav')
+
+    <nav class="navbar navbar-expand-md sticky-top border-bottom">
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand " href="#">GoGreen</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="#navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse flex-grow-0 " tabindex="-1" id="navbarCollapse">
+
+@endsection
+

@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        // 'admin' => [
+        //     'driver' => 'session',
+        //     'provider' => 'admins', // Use the admins provider
+        // ],
     ],
 
     /*
@@ -69,6 +74,14 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        // 'admins' => [
+        //     'driver' => 'database',
+        //     'table' => 'admins',
+        // ],
+
+        // 'driver' => 'eloquent',
+        // 'model' => App\Models\Admin::class,
     ],
 
     /*
@@ -89,7 +102,7 @@ return [
     | quickly generating a very large amount of password reset tokens.
     |
     */
-
+    
     'passwords' => [
         'users' => [
             'provider' => 'users',
