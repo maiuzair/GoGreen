@@ -155,7 +155,7 @@ class AdminController extends Controller
     public function viewEditProduct(Request $request, $id){
         $product = ProductModel::find($id);
         if ($request->session()->has('admin_Id') && $request->session()->has('Username')){
-            return redirect()->route('editProduct', $id)->with('product', $product);
+            return view('editProduct',['product' => $product]);
         }
         else 
             return redirect('adminLogin')->with('error', 'Login Required'); 

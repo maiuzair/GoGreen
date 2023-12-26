@@ -27,7 +27,6 @@
             </div>
         </div>
 
-        <div class="b-example-divider"></div>
 
         <div class="container col-xxl-8 px-4 py-5">
             <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
@@ -51,7 +50,6 @@
             </div>
         </div>
 
-        <div class="b-example-divider"></div>
 
         <div class="px-4 pt-5 my-5 text-center border-bottom">
             <h1 class="display-4 fw-bold text-body-emphasis">Categories</h1>
@@ -60,7 +58,7 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <a href="buy.html#indoor"><img src="images/landing-carousel-1-75.jpg" class="d-block w-100"
-                                alt="indoor plants" width="100%" height="100%"></a>
+                                alt="indoor plants" width="100%"></a>
                         <div class="container">
                             <div class="carousel-caption text-start">
                                 <h1 class="text-dark">Indoor plants</h1>
@@ -69,7 +67,7 @@
                     </div>
                     <div class="carousel-item">
                         <a href="buy.html#outdoor"><img src="images/landing-carousel-2-75.jpg" class="d-block w-100"
-                                alt="outdoor plants" width="100%" height="100%"></a>
+                                alt="outdoor plants" width="100%"></a>
                         <div class="container">
                             <div class="carousel-caption text-start">
                                 <h1 class="text-light">Outdoor plants</h1>
@@ -78,7 +76,7 @@
                     </div>
                     <div class="carousel-item">
                         <a href="buy.html#succulents"><img src="images/landing-carousel-3-75.jpg"
-                                class="d-block w-100" alt="succulents" width="100%" height="100%"></a>
+                                class="d-block w-100" alt="succulents" width="100%"></a>
                         <div class="container">
                             <div class="carousel-caption text-start">
                                 <h1 class="text-dark">Succulents</h1>
@@ -87,7 +85,7 @@
                     </div>
                     <div class="carousel-item">
                         <a href="buy.html#flowers"><img src="images/landing-carousel-3-75.jpg" class="d-block w-100"
-                                alt="flowers" width="100%" height="100%"></a>
+                                alt="flowers" width="100%"></a>
                         <div class="container">
                             <div class="carousel-caption text-start">
                                 <h1 class="text-dark">Flowers</h1>
@@ -109,7 +107,6 @@
 
         </div>
 
-        <div class="b-example-divider mb-0"></div>
     </main>
 
 @endsection

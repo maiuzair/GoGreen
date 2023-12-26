@@ -183,7 +183,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="productName" class="form-label">Product Name:</label>
-                            <input type="text" class="form-control" id="productName" name="productName" value="{{ $product->Name }}" required>" required>
+                            <input type="text" class="form-control" id="productName" name="productName" value="{{ $product->Name }}" required>
                         </div>
 
                         <div class="mb-3">

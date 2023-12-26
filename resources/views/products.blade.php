@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-
+<!-- testing git -->
 <head>
 
     <meta charset="utf-8">
@@ -208,12 +208,11 @@
                                         <div class="card-body">
                                             <p class="card-text">{{ $product->Name }}</p>
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <form action="{{ route('deleteProduct', $product->id) }}"method="post">
+                                                <form action="{{ route('deleteProduct', $product->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <div class="btn-group">
-                                                        <button type="button" onclick="window.location.href='{{ route('editProduct', $product->id) }}'"
-                                                            href="{{ route('editProduct', $product->id) }}"
+                                                        <button type="button" onclick="return window.location.href='{{ route('editProduct', $product->id) }}'"
                                                             class="btn btn-sm btn-outline-secondary">Edit</button>
                                                         <button type="submit"
                                                             class="btn btn-sm btn-outline-secondary">Delete</button>
