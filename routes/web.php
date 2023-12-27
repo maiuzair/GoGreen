@@ -31,9 +31,7 @@ Route::get('/whyplants', function () {
     return view('whyplants');
 });
 
-Route::get('/buy', function () {
-    return view('buy');
-});
+
 
 // -----Admin------
 Route::get('/adminLogin', '\App\Http\Controllers\AdminController@showLoginForm')->name('adminLogin');
@@ -72,6 +70,10 @@ Route::post('/signup', '\App\Http\Controllers\CustomerController@signup')->name(
 Route::get('/logout', '\App\Http\Controllers\CustomerController@logout')->name('logout');
 
 Route::get('/customerProfile', '\App\Http\Controllers\CustomerController@profile')->name('profile');
+
+// BUY PAGE
+
+Route::get('/buy', '\App\Http\Controllers\CustomerController@showBuyPage')->name('buy');
 
 
 

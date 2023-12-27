@@ -91,5 +91,18 @@ class CustomerController extends Controller
     }
 
 
+    // BUY PAGE
+    public function showBuyPage() {
+
+        $productModel = new ProductModel();
+
+        $cateogory = ["Indoor","Outdoor","Succulents","Flower"]; 
+        $products = [];
+        for($i = 0; $i < count($cateogory); $i++){
+            $products[$i] = $productModel->getProductByCategory($cateogory[$i]);
+        }
+
+        return view('buy', ['products' => $products]);   
+    }
 
 }
