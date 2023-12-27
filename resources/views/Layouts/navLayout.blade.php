@@ -26,7 +26,7 @@
                     <li class="nav-item"><a class="nav-link" href="index" aria-current="page">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="whyplants">Why plants?</a></li>
                     <li class="nav-item dropdown" id="buy-dropdown">
-                        <a class="nav-link dropdown-toggle" href="buy" role="button" data-bs-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" href="buy" role="button"
                             aria-expanded="false">
                             Buy plants
                         </a>

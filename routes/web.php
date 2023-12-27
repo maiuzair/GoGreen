@@ -30,26 +30,17 @@ Route::get('/index', function () {
 Route::get('/whyplants', function () {
     return view('whyplants');
 });
+
 Route::get('/buy', function () {
     return view('buy');
 });
 
-Route::get('/signup', function () {
-    return view('signup');
-});
-
-Route::get('/login', function () {
-    return view('login');
-});
-
-
-
-
-
-
 // -----Admin------
 Route::get('/adminLogin', '\App\Http\Controllers\AdminController@showLoginForm')->name('adminLogin');
 Route::post('/adminLogin', '\App\Http\Controllers\AdminController@login')->name('adminLogin.post');
+//Route::get('/adminLogin', '\App\Http\Controllers\AdminController@logout')->name('adminLogout');
+
+Route::get('/adminLogout', '\App\Http\Controllers\AdminController@logout');
 
 Route::get('/dashboard', '\App\Http\Controllers\AdminController@viewDashboard');
 
@@ -67,11 +58,20 @@ Route::delete('/products/{id}', '\App\Http\Controllers\AdminController@deletePro
 // ========
 
 
-Route::post('/login', '\App\Http\Controllers\VendorController@login');
+// Customer
 
 
+Route::get('/login', '\App\Http\Controllers\CustomerController@showLoginForm')->name('login');
 
-Route::post('/signup', '\App\Http\Controllers\VendorController@store');
+Route::get('/signup', '\App\Http\Controllers\CustomerController@showsignupForm')->name('signup');
 
-Route::get('/logout', '\App\Http\Controllers\VendorController@logout');
+Route::post('/login', '\App\Http\Controllers\CustomerController@login')->name('login.post');
+
+Route::post('/signup', '\App\Http\Controllers\CustomerController@signup')->name('signup.post');;
+
+Route::get('/logout', '\App\Http\Controllers\CustomerController@logout')->name('logout');
+
+Route::get('/customerProfile', '\App\Http\Controllers\CustomerController@profile')->name('profile');
+
+
 

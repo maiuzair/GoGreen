@@ -179,7 +179,7 @@
                             </li>
                             <li class="nav-item">
                                 {{-- SIGN OUT---------------------------------------------------------------------------------- --}}
-                                <a class="nav-link d-flex align-items-center gap-2" href="/adminLogin">
+                                <a class="nav-link d-flex align-items-center gap-2" href="adminLogout">
                                     <svg class="bi" width="20px" height="20px">
                                         <use xlink:href="#door-closed" />
                                     </svg>

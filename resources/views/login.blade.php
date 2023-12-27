@@ -21,6 +21,16 @@
                     </div>
                     <div class="col-md-10 mx-auto col-lg-5">
                         <div class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+                            @if (session('error'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+                            @if (session('message'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                             <form action="login" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-floating mb-3">

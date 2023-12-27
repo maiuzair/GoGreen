@@ -12,8 +12,13 @@ use App\Models\VendorModel;
 use App\Models\Admin;
 use App\Models\ProductModel;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests; 
+
 class AdminController extends Controller
 {
+    use AuthorizesRequests, ValidatesRequests;
+    
     public function showLoginForm()
     {
         return view('adminLogin');

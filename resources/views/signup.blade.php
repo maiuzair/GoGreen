@@ -21,6 +21,7 @@
                 </div>
                 <div class="col-md-10 mx-auto col-lg-5">
                   <div class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+                   
                     <form action="signup" method="POST" enctype="multipart/form-data">
                       @csrf
                       <div class="form-floating mb-3">
@@ -37,6 +38,17 @@
                           <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
                           <label for="floatingPassword">Password</label>
                       </div>
+                      <div class="form-floating mb-3">
+                        <input type="telphone" name="phone" class="form-control" id="floatingInput"
+                            placeholder="01302388494">
+                        <label for="floatingInput">Telephone</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="address" class="form-control" id="floatingInput"
+                            placeholder="Residential Address">
+                        <label for="floatingInput">Address</label>
+                    </div>
+                      
                       {{-- <div class="checkbox mb-3">
                           <label>
                               <input type="checkbox" value="remember-me"> Remember me

@@ -73,6 +73,10 @@ body{
   .flex-equal > * {
     flex: 1; 
   }
+
+  .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+  }
   
   @media (min-width: 768px) {
     .flex-md-equal > * {
