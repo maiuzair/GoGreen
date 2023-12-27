@@ -37,9 +37,7 @@
                             <li><a class="dropdown-item" href="buy#succulents">Flowers</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Plant care</a></li>
                     <li class="nav-item"><a class="nav-link" href="login">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="signup">Become a vendor</a></li>
                     <li></li>
 
 
