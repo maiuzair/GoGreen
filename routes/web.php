@@ -84,5 +84,10 @@ Route::get('/buy', '\App\Http\Controllers\CustomerController@showBuyPage')->name
 
 Route::get('buy/{term}', '\App\Http\Controllers\AdminController@searchProduct');
 
+Route::get('/cart', function () {
+    return view('cart');
+});
 
-
+Route::get('/checkout', function () {
+    return view('checkout');
+});

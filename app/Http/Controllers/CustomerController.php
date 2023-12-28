@@ -111,5 +111,8 @@ class CustomerController extends Controller
         return $product;
     }
 
+    public function addToCart(){
+        
+    }
 
 }
