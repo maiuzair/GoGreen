@@ -85,7 +85,7 @@ class AdminController extends Controller
 
     public function searchProduct($term) {
         // $product = ProductModel::where('Name', 'like', '%' . $term . '%')->take(3)->get(['Name']);
-        $product = ProductModel::where('Name', 'like', "$term%")->take(3)->get();
+        $product = ProductModel::where('Name', 'like', "$term%")->take(10)->get();
         return $product;
     }
 
