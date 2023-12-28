@@ -105,4 +105,11 @@ class CustomerController extends Controller
         return view('buy', ['products' => $products]);   
     }
 
+    public function searchProduct($term) {
+        // $product = ProductModel::where('Name', 'like', '%' . $term . '%')->take(3)->get(['Name']);
+        $product = ProductModel::where('Name', 'like', "$term%")->take(3)->get();
+        return $product;
+    }
+
+
 }

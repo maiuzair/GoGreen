@@ -81,6 +81,16 @@ class AdminController extends Controller
             return redirect('adminLogin')->with('error', 'Login Required'); 
     }
 
+
+
+    public function searchProduct($term) {
+        // $product = ProductModel::where('Name', 'like', '%' . $term . '%')->take(3)->get(['Name']);
+        $product = ProductModel::where('Name', 'like', "$term%")->take(3)->get();
+        return $product;
+    }
+
+
+
     public function viewAddProduct(Request $request) {
 
         if ($request->session()->has('admin_Id') && $request->session()->has('Username')){
@@ -102,30 +112,31 @@ class AdminController extends Controller
                 'quantity' => 'required|integer|min:1',
                 'category' => 'required',
                 'mainImage' => 'required|image',
-                'otherImages.*' => 'nullable|image', // Apply image validation to each file in otherImages
+                'OtherImages.*' => 'nullable|image', // Apply image validation to each file in OtherImages
             ]);
 
             $product->Name = $request->input('productName');
             $product->Description = $request->input('description');
             $product->Price = $request->input('price');
             $product->Quantity = $request->input('quantity');
-            $product->Category = $request->input('category');
+            $category = $request->input('category');
+            $product->Category = implode(',', $category);
 
             $mainImage = $request->file('mainImage');
             $mainImageName = $mainImage->getClientOriginalName();
             $mainImage->move('uploads', $mainImageName);
             $product->MainImage = 'uploads/'.$mainImageName;
 
-            $otherImages = $request->file('otherImages');
+            $OtherImages = $request->file('OtherImages');
 
-            if($otherImages){
+            if($OtherImages){
                 $otherImagePaths = [];
-                foreach($otherImages as $image) {
+                foreach($OtherImages as $image) {
                     $imageName = $image->getClientOriginalName();
                     $image->move('uploads', $imageName);
                     $otherImagePaths[] = 'uploads/'.$imageName;
                 }
-                $product->otherImages = implode(',', $otherImagePaths);
+                $product->OtherImages = implode(',', $otherImagePaths);
 
             }
         
@@ -176,30 +187,31 @@ class AdminController extends Controller
                 'quantity' => 'required|integer|min:1',
                 'category' => 'required',
                 'mainImage' => 'required|image',
-                'otherImages.*' => 'nullable|image', // Apply image validation to each file in otherImages
+                'OtherImages.*' => 'nullable|image', // Apply image validation to each file in OtherImages
             ]);
 
             $product->Name = $request->input('productName');
             $product->Description = $request->input('description');
             $product->Price = $request->input('price');
             $product->Quantity = $request->input('quantity');
-            $product->Category = $request->input('category');
+            $category = $request->input('category');
+            $product->Category = implode(',', $category);
 
             $mainImage = $request->file('mainImage');
             $mainImageName = $mainImage->getClientOriginalName();
             $mainImage->move('uploads', $mainImageName);
             $product->MainImage = 'uploads/'.$mainImageName;
 
-            $otherImages = $request->file('otherImages');
+            $OtherImages = $request->file('OtherImages');
 
-            if($otherImages){
+            if($OtherImages){
                 $otherImagePaths = [];
-                foreach($otherImages as $image) {
+                foreach($OtherImages as $image) {
                     $imageName = $image->getClientOriginalName();
                     $image->move('uploads', $imageName);
                     $otherImagePaths[] = 'uploads/'.$imageName;
                 }
-                $product->otherImages = implode(',', $otherImagePaths);
+                $product->OtherImages = implode(',', $otherImagePaths);
 
             }
         
@@ -213,5 +225,7 @@ class AdminController extends Controller
             return redirect('adminLogin')->with('error', 'Login Required'); 
 
     }
+
+
 
 }

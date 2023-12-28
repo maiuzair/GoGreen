@@ -47,8 +47,16 @@ Route::get('/products', '\App\Http\Controllers\AdminController@viewProducts')->n
 Route::get('/addProduct', '\App\Http\Controllers\AdminController@viewAddProduct')->name('addProduct');
 Route::post('/addProduct', '\App\Http\Controllers\AdminController@addProduct')->name('addProduct.post');
 
-Route::get('/editProduct{id}', '\App\Http\Controllers\AdminController@viewEditProduct')->name('editProduct');
-Route::post('/editProduct{id}', '\App\Http\Controllers\AdminController@editProduct')->name('editProduct.post');
+
+Route::get('products/{term}', '\App\Http\Controllers\AdminController@searchProduct');
+
+
+
+Route::get('/editProduct/{id}', '\App\Http\Controllers\AdminController@viewEditProduct')->name('editProduct');
+
+
+
+Route::post('/editProduct/{id}', '\App\Http\Controllers\AdminController@editProduct')->name('editProduct.post');
 
 // Route::post('/products/{id}', '\App\Http\Controllers\AdminController@addProduct')->name('deleteProduct');
 Route::delete('/products/{id}', '\App\Http\Controllers\AdminController@deleteProduct')->name('deleteProduct');
@@ -57,7 +65,6 @@ Route::delete('/products/{id}', '\App\Http\Controllers\AdminController@deletePro
 
 
 // Customer
-
 
 Route::get('/login', '\App\Http\Controllers\CustomerController@showLoginForm')->name('login');
 
@@ -74,6 +81,8 @@ Route::get('/customerProfile', '\App\Http\Controllers\CustomerController@profile
 // BUY PAGE
 
 Route::get('/buy', '\App\Http\Controllers\CustomerController@showBuyPage')->name('buy');
+
+Route::get('buy/{term}', '\App\Http\Controllers\AdminController@searchProduct');
 
 
 
