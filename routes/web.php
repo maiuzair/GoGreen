@@ -91,3 +91,5 @@ Route::get('/cart', function () {
 Route::get('/checkout', function () {
     return view('checkout');
 });
+
+Route::get('getproduct/{id}', '\App\Http\Controllers\CartController@getProduct');

@@ -31,23 +31,25 @@
 // }
 
 function addToCart(event) {
-    // Get the parent element of the clicked button, which represents a product card
+
     const card = event.target.closest('.card');
-
-    // Extract the product ID from the data-id attribute of the card
     const pid = card.dataset.id;
+    const pName = card.dataset.name;
+    const pPrice = card.dataset.price;
 
-    // Retrieve the current contents of the shopping cart from local storage
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     if (cart.includes(pid)) {
         alert('The product is already in the cart');
-    } else {
-        cart.push(pid);
-
-        // Update the shopping cart data in local storage
-        localStorage.setItem('cart', JSON.stringify(cart));
-
-        alert('Product added to cart');
     }
+    else {
+            //console.log(data);
+            cart.push(pid);
+            cart.push(pName);
+            cart.push(pPrice);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            console.log(localStorage.getItem('cart'));
+            alert('Product added to cart');
+            }
+    
 }

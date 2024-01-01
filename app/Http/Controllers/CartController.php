@@ -13,9 +13,17 @@ use App\Models\ProductModel;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests; 
 
-class AdminController extends Controller
+class CartController extends Controller
 {
     use AuthorizesRequests, ValidatesRequests;
     
-
+    public function getProduct($id){
+        $product = ProductModel::find($id);
+        if ($product){
+            return response()->json.($product);
+        }
+        else {
+            return response()->json(['error' => 'Product not found'], 404);
+        }
+    }
 }
