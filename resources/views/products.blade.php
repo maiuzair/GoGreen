@@ -1,27 +1,23 @@
 @extends('Layouts.adminLayout')
 @section('admincontent')
     <style>
-        /* Add some transitions for smooth hover effects */
+
         .card {
             transition: transform .2s;
         }
 
-        /* Add a hover effect to scale the cards */
         .card:hover {
             transform: scale(1.03);
         }
 
-        /* Add a shadow effect to the cards */
         .card {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         }
 
-        /* Add a transition effect for the cards' shadows */
         .card:hover {
             box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
         }
 
-        /* Make the buttons more stylish */
         .btn-outline-secondary {
             border-color: #6c757d;
             color: #6c757d;
@@ -33,9 +29,8 @@
             color: white;
         }
 
-        /* Add some style to the search bar */
         #search {
-            /* border-radius: 20px; */
+
             transition: all .5s;
         }
 
@@ -114,7 +109,7 @@
 
         allButtons.forEach(button => {
             button.addEventListener('click', (e) => {
-                //e.preventDefault();
+                // e.preventDefault();
 
                 const href = button.getAttribute('href');
 

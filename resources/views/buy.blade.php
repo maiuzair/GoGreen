@@ -134,7 +134,7 @@
                         <div class="col">
 
                             @foreach ($products[1] as $product)
-                                <div class="card shadow-sm">
+                                <div class="card shadow-sm" data-id="{{ $product->id }}" data-name="{{ $product->Name }}" data-price="{{ $product->Price }}">
                                     <img class="bd-placeholder-img card-img-top" width="100%" height="300"
                                         src="{{ asset($product->MainImage) }}" alt="Product image" />
                                     <div class="card-body">
@@ -142,8 +142,7 @@
                                         <p class="card-text">{{ $product->Description }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">View
-                                                    cart</button>
+                                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="return addToCart(event)">Add to cart </button>
                                             </div>
                                             <small class="text-body-secondary">${{ $product->Price }}</small>
                                         </div>
@@ -171,7 +170,7 @@
                         <div class="col">
 
                             @foreach ($products[2] as $product)
-                                <div class="card shadow-sm">
+                                <div class="card shadow-sm" data-id="{{ $product->id }}" data-name="{{ $product->Name }}" data-price="{{ $product->Price }}">
                                     <img class="bd-placeholder-img card-img-top" width="100%" height="300"
                                         src="{{ asset($product->MainImage) }}" alt="Product image" />
                                     <div class="card-body">
@@ -179,7 +178,7 @@
                                         <p class="card-text">{{ $product->Description }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Add to
+                                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="return addToCart(event)">Add to
                                                     cart</button>
                                             </div>
                                             <small class="text-body-secondary">${{ $product->Price }}</small>
@@ -210,7 +209,7 @@
                         <div class="col">
 
                             @foreach ($products[3] as $product)
-                                <div class="card shadow-sm">
+                                <div class="card shadow-sm" data-id="{{ $product->id }}" data-name="{{ $product->Name }}" data-price="{{ $product->Price }}">
                                     <img class="bd-placeholder-img card-img-top" width="100%" height="300"
                                         src="{{ asset($product->MainImage) }}" alt="Product image" />
                                     <div class="card-body">
@@ -218,7 +217,7 @@
                                         <p class="card-text">{{ $product->Description }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Add to
+                                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="return addToCart(event)"> Add to
                                                     cart</button>
                                             </div>
                                             <small class="text-body-secondary">${{ $product->Price }}</small>

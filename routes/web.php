@@ -88,8 +88,10 @@ Route::get('/cart', function () {
     return view('cart');
 });
 
-Route::get('/checkout', function () {
-    return view('checkout');
-});
+Route::get('checkout', '\App\Http\Controllers\CustomerController@checkout' );
 
-Route::get('getproduct/{id}', '\App\Http\Controllers\CartController@getProduct');
+Route::post('checkout', '\App\Http\Controllers\CustomerController@confirmOrder' );
+
+// Route::get('/checkout', function () {
+//     return view('checkout');
+// });

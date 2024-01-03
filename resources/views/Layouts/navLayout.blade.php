@@ -42,7 +42,7 @@
 
 
                 </ul>
-                <a class="nav-link ps-3" href="cart.html"><svg class="bi" width="16" height="16">
+                <a class="nav-link ps-3" href="cart"><svg class="bi" width="16" height="16">
                         <use xlink:href="#cart" />
                     </svg></a>
             </div>

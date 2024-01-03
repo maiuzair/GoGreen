@@ -13,6 +13,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Models\Customer;
 use App\Models\Admin;
 use App\Models\ProductModel;
+use App\Models\Order;
 
 class CustomerController extends Controller
 {
@@ -52,6 +53,31 @@ class CustomerController extends Controller
 
     }
 
+    // public function login(Request $request){
+
+    //     if ($request->isMethod('post')){
+    //         $email = $request->input('email');
+    //         $password = $request->input('password');
+    
+    //         $customers = Customer::where('Email', $email)->where('Password', $password);
+            
+            
+    //         if($customers->exists()){
+    //             $customer = $customers->first();
+    //             $request->session()->put('customer_id', $customer->id);
+    //             $request->session()->put('customer_name', $customer->Name);
+    //             $request->session()->put('customer_email', $customer->Email);
+    //             // $request->session()->put('customer_name', $customer->Name);
+    //             //$orders = Order::where('customerId', $customer->id);
+    //             return redirect()->route('profile', $customer->id);
+    //             // return redirect()->route('profile', ['customers'=> $customer, 'orders' => $orders]);
+    //         }
+    
+    //         return redirect()->route('login')->with('error', 'Invalid credentials');
+    
+    //     }
+    // }
+
     public function login(Request $request){
 
         if ($request->isMethod('post')){
@@ -90,6 +116,24 @@ class CustomerController extends Controller
         return redirect('login')->with('error', 'Login Required'); 
     }
 
+    // public function logout(Request $request){
+    //     $request->session()->forget('customer_id');
+    //     $request->session()->forget('customer_email');
+    //     $request->session()->forget('customer_name');
+
+    //     return redirect('login')->with('error', 'Logged out');
+    // }
+
+    // public function profile(Request $request, $id){
+    //     if ($request->session()->has('customer_id')){
+    //         //$customer = Customer::find($id);
+    //         //$orders = Order::where('customerId', $id);
+    //         return view('customerProfile');
+    //         // return view('customerProfile' , ['customer' => $customer, 'orders' => $orders]);
+    //     }
+    //     return redirect('login')->with('error', 'Login Required'); 
+    // }
+
 
     // BUY PAGE
     public function showBuyPage() {
@@ -111,8 +155,47 @@ class CustomerController extends Controller
         return $product;
     }
 
-    public function addToCart(){
+    public function checkout(Request $request){
+        if ($request->session()->has('customer_id')){
+            $customerId = $request->session()->get('customer_id');
+            $customer = Customer::find($customerId);
+        }
+        else{
+            $customer = null;
+            return view('checkout');
+        }
+
+        return view('checkout' , ['customer' => $customer]);
+    }
+
+    public function confirmOrder(Request $request) {
+        // Get the data from the hidden input field
+        $dataFromLocalStorage = $request->input('cart_data');
+
+        $b = $request->input('baddress');
+        $s = $request->input('saddress');
+
+        // Your server-side logic here
+        $order = new Order();
+        $order->products = $dataFromLocalStorage;
+        if( $s != null ){
+            $order->shippingAddress = $s;
+        }
+        else{
+            $order->shippingAddress = $b;
+        }
+
+        if ($request->session()->has('customer_id')){
+            $customerId = $request->session()->get('customer_id');
+            $order->customerId = $customerId;
+        }
+
         
+        // Save the order to the database or perform other actions
+        $order->save();
+
+        // Return a response if needed
+        return redirect('buy');
     }
 
 }

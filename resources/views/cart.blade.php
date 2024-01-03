@@ -12,7 +12,7 @@
 @section('maincontent')
 
 <!--==================================================MAIN-->
-<script src="{{URL::asset('scripts/script.js')}}"></script>
+<!-- <script src="{{URL::asset('scripts/script.js')}}"></script> -->
 
 <main>
     <div class="container col-xl-10 col-xxl-8 px-4 py-5">
@@ -20,16 +20,11 @@
       <span class="cart-heading">Your cart</span>
     </h4>
     <ul class="list-group mb-3" id="list">
-
-      <li class="list-group-item d-flex justify-content-between">
-        <span>Total (USD)</span>
-        <strong>$20</strong>
-      </li>
     </ul>
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
       <a href="checkout">
-        <button type="button" class="btn btn-success btn-lg px-4 me-sm-3 mt-3 ">Proceed to checkout</button>
+        <a href="checkout" ><button type="button" class="btn btn-success btn-lg px-4 me-sm-3 mt-3 ">Proceed to checkout</button></a>
       </a>
     </div>
     
@@ -37,47 +32,94 @@
 
 
 <script>
-    // Retrieve the cart data from local storage
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    // Display the cart data
-    //document.write('<ul class="list-group mb-3">');
-
-    cart.forEach(productId => {
-        // You may need to fetch product details from the server using AJAX or provide them when adding to the cart
-        const productName = ; // Replace with the actual product name
-        const productPrice = ; // Replace with the actual product price
-
-        document.write(`
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                    <h6 class="my-0">${productName}</h6>
-                </div>
-                <span class="text-body-secondary">$${productPrice}</span>
-            </li>
-        `);
-    });
-
-    document.write(`
-        <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong>$${calculateTotal(cart)}</strong>
-        </li>
-    `);
-
-    document.write('</ul>');
-
-    // Function to calculate the total based on the product prices
-    function calculateTotal(cart) {
-        // You may need to fetch actual product prices from the server or provide them when adding to the cart
-        const productPrices = {
-            // Map product IDs to their respective prices
-            'productId1': 20,
-            'productId2': 30,
-            // Add more products as needed
-        };
-
-        return cart.reduce((total, productId) => total + (productPrices[productId] || 0), 0);
+    function incQty(button){
+      var name = button.parentNode.getAttribute('data-name');
+      for(var i=0; i < cart.length; i++){
+        if (cart[i][1] == name){
+            cart[i][3] = cart[i][3]+1;
+            button.previousElementSibling.value = cart[i][3];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            console.log(localStorage.getItem('cart'));
+            break;
+        }
+      }
+      displayTotal();
+      alert("inc");
     }
+
+    function decQty(button){
+      var name = button.parentNode.getAttribute('data-name');
+      for(var i=0; i < cart.length; i++){
+        if (cart[i][1] == name){
+
+          cart[i][3] = cart[i][3]-1;
+
+          if(cart[i][3] != 0)
+          {
+            button.nextElementSibling.value = cart[i][3]; 
+          }
+
+          else
+          {
+            button.closest('li').remove();
+            cart.splice(i,1);
+          }
+
+          localStorage.setItem('cart', JSON.stringify(cart));
+          console.log(localStorage.getItem('cart'));
+          break;
+
+        }
+      }
+
+      displayTotal();
+      alert("dec");
+    }
+
+    function calcTotal(){
+      total = 0;
+        for(var i=0; i < cart.length; i++){
+          total += cart[i][2] * cart[i][3];
+        }
+        return total;
+    }
+
+    function displayTotal(){
+      if( document.getElementById('total') == null){
+        document.getElementById('list').innerHTML +=`
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Total (USD)</span>
+          <strong id="total">$${ calcTotal(cart) }</strong>
+        </li>
+        `;
+      }
+      else{
+        document.getElementById('total').innerHTML = `$${ calcTotal(cart) }`;
+      }
+      
+    }
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.forEach(productInfo => {
+        const productName = productInfo[1];
+        const productPrice = productInfo[2];
+        var productQuantity = productInfo[3];
+
+        document.getElementById('list').innerHTML +=`
+            <li class="list-group-item d-flex justify-content-between">
+                <span>${productName} </span>
+                <div data-name="${productName}">
+                  <button class="qty-btn" width="20px" onclick="return decQty(this)">-</button>
+                  <input class="qty-txt" id="qty" type="text" value="${productQuantity}">
+                  <button class="qty-btn" width="20px" onclick="return incQty(this)">+</button>
+                </div>
+                <strong>$${productPrice}</strong>
+            </li>
+         `;
+     });
+
+     displayTotal();
+
 </script>
 @endsection

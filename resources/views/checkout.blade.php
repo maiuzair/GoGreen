@@ -1,28 +1,10 @@
-<!doctype html>
-<html lang="en">
-  <head>
+@extends('Layouts.mainLayout')
+@section('title', 'Checkout')
+@section('css')
+    href={{ URL::asset('css/checkout.css')}}
+@endsection
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.118.2">
-    <title>Checkout</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
-
-    
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-
-  <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Custom styles for this template -->
-    <link href="styles/styles.css" rel="stylesheet">
-    <link href="styles/checkout.css" rel="stylesheet">
-</head>
-<body class="bg-body-tertiary">
-
+@section('maincontent')
   <div class="container">
     <main>
       <div class="py-5 text-center">
@@ -33,78 +15,58 @@
         <div class="col-md-5 col-lg-4 order-md-last">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-primary">Your cart</span>
-            <span class="badge bg-primary rounded-pill">3</span>
+            <span class="badge bg-primary rounded-pill" id="count"></span>
           </h4>
-          <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Product name</h6>
-                <small class="text-body-secondary">Brief description</small>
-              </div>
-              <span class="text-body-secondary">$12</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-body-secondary">Brief description</small>
-              </div>
-              <span class="text-body-secondary">$8</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-body-secondary">Brief description</small>
-              </div>
-              <span class="text-body-secondary">$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span class="text-success">−$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
-            </li>
-          </ul>
-
-          <form class="card p-2">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Promo code">
-              <button type="submit" class="btn btn-secondary">Redeem</button>
-            </div>
-          </form>
+          <ul class="list-group mb-3" id="list"></ul>
         </div>
-        <div class="col-md-7 col-lg-8">
+
+        
+          <div class="col-md-7 col-lg-8">
           <h4 class="mb-3">Billing address</h4>
-          <form class="needs-validation" novalidate>
+          <form  action="checkout" method="post" enctype="multipart/form-data">
+          <input type="hidden" id="cart-data" name="cart_data" value="">
+            @csrf
+          @if(isset($customer))
             <div class="row g-3">
               <div class="col-sm-6">
-                <label for="firstName" class="form-label">First name</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                <label for="firstName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="firstName" value="{{$customer->Name}}" />
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
 
-              <div class="col-sm-6">
-                <label for="lastName" class="form-label">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+              <div class="col-12">
+                <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
+                <input type="email" class="form-control" id="email" placeholder="you@example.com" value="{{$customer->Email}}">
                 <div class="invalid-feedback">
-                  Valid last name is required.
+                  Please enter a valid email address for shipping updates.
                 </div>
               </div>
 
               <div class="col-12">
-                <label for="username" class="form-label">Username</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text">@</span>
-                  <input type="text" class="form-control" id="username" placeholder="Username" required>
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address" name="baddress" placeholder="1234 Main St" value="{{$customer->Address}}">
                 <div class="invalid-feedback">
-                    Your username is required.
-                  </div>
+                  Please enter your shipping address.
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="address" class="form-label">Shipping Address</label>
+                <input type="text" class="form-control" id="ship-address" name="saddress" placeholder="1234 Main St" value="{{$customer->Address}}">
+                <div class="invalid-feedback">
+                  Please enter your shipping address.
+                </div>
+              </div>
+
+        @else
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label for="firstName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="firstName"required>
+                <div class="invalid-feedback">
+                  Valid first name is required.
                 </div>
               </div>
 
@@ -125,45 +87,18 @@
               </div>
 
               <div class="col-12">
-                <label for="address2" class="form-label">Address 2 <span class="text-body-secondary">(Optional)</span></label>
-                <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-              </div>
-
-              <div class="col-md-5">
-                <label for="country" class="form-label">Country</label>
-                <select class="form-select" id="country" required>
-                  <option value="">Choose...</option>
-                  <option>United States</option>
-                </select>
+                <label for="address" class="form-label">Shipping Address</label>
+                <input type="text" class="form-control" id="ship-address" placeholder="1234 Main St" disabled>
                 <div class="invalid-feedback">
-                  Please select a valid country.
+                  Please enter your shipping address.
                 </div>
               </div>
-
-              <div class="col-md-4">
-                <label for="state" class="form-label">State</label>
-                <select class="form-select" id="state" required>
-                  <option value="">Choose...</option>
-                  <option>California</option>
-                </select>
-                <div class="invalid-feedback">
-                  Please provide a valid state.
-                </div>
-              </div>
-
-              <div class="col-md-3">
-                <label for="zip" class="form-label">Zip</label>
-                <input type="text" class="form-control" id="zip" placeholder="" required>
-                <div class="invalid-feedback">
-                  Zip code required.
-                </div>
-              </div>
-            </div>
+            @endif
 
             <hr class="my-4">
 
             <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="same-address">
+              <input type="checkbox" class="form-check-input" id="same-address" checked>
               <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
             </div>
 
@@ -178,7 +113,7 @@
 
             <div class="my-3">
               <div class="form-check">
-                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" required>
                 <label class="form-check-label" for="credit">Credit card</label>
               </div>
               <div class="form-check">
@@ -186,8 +121,8 @@
                 <label class="form-check-label" for="debit">Debit card</label>
               </div>
               <div class="form-check">
-                <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-                <label class="form-check-label" for="paypal">PayPal</label>
+                <input id="cod" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                <label class="form-check-label" for="paypal">Cash on delivery</label>
               </div>
             </div>
 
@@ -233,17 +168,7 @@
         </div>
       </div>
     </main>
-
-    <footer class="my-5 pt-5 text-body-secondary text-center text-small">
-      <p class="mb-1">&copy; 2017–2023 Company Name</p>
-      <ul class="list-inline">
-        <li class="list-inline-item"><a href="#">Privacy</a></li>
-        <li class="list-inline-item"><a href="#">Terms</a></li>
-        <li class="list-inline-item"><a href="#">Support</a></li>
-      </ul>
-    </footer>
-  </div>
+</div>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script src="checkout.js"></script></body>
-</html>
+<script src="{{ URL::asset('scripts/checkout.js') }}"></script>
+@endsection

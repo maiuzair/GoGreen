@@ -70,6 +70,22 @@
     display: block !important;
   }
 
+  .qty-btn{
+    width:20px;
+    height:30px;
+    border:1px solid gray;
+    text-align: center;
+    align-items: center;
+    line-height: 10px;
+    
+  }
+
+  .qty-txt{
+    width:32px;
+    height: 30px;
+    text-align: center;
+  }
+
   /* #buy-dropdown .dropdown-menu {
     display: none;
   }

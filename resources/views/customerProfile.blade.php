@@ -12,6 +12,8 @@
 @section('maincontent')
 
 <h1>Customer Profile</h1>
+
+
 <a class="nav-link d-flex align-items-center gap-2" href="logout">
     <svg class="bi" width="20px" height="20px">
         <use xlink:href="#door-closed" />
