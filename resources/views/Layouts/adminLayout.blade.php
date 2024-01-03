@@ -105,7 +105,7 @@
 
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="dashboard">
+                            <a class="nav-link active" href="dashboard">
                                 <svg class="bi" width="20px" height="20px">
                                     <use xlink:href="#house-fill" />
                                 </svg>
@@ -126,30 +126,6 @@
                                     <use xlink:href="#cart" />
                                 </svg>
                                 Products
-                            </a>
-                        </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <svg class="bi" width="20px" height="20px">
-                                    <use xlink:href="#people" />
-                                </svg>
-                                Alerts
-                            </a>
-                        </li> --}}
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <svg class="bi" width="20px" height="20px">
-                                    <use xlink:href="#graph-up" />
-                                </svg>
-                                Reports
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <svg class="bi" width="20px" height="20px">
-                                    <use xlink:href="#gear-wide-connected" />
-                                </svg>
-                                Settings
                             </a>
                         </li>
                         <li class="nav-item">

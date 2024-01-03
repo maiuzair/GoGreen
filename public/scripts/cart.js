@@ -15,7 +15,7 @@ function addToCart(event) {
             cart[i] = productInfo;
             localStorage.setItem('cart', JSON.stringify(cart));
             console.log(localStorage.getItem('cart'));
-            alert('Product added to cart');
+            //alert('Product added to cart');
             return;
         }
     }
@@ -23,7 +23,7 @@ function addToCart(event) {
     cart.push(productInfo);
     localStorage.setItem('cart', JSON.stringify(cart));
     console.log(localStorage.getItem('cart'));
-    alert('Product added to cart');
+    //alert('Product added to cart');
     
 }
 

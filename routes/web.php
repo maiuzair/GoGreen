@@ -74,7 +74,7 @@ Route::post('/login', '\App\Http\Controllers\CustomerController@login')->name('l
 
 Route::post('/signup', '\App\Http\Controllers\CustomerController@signup')->name('signup.post');;
 
-Route::get('/logout', '\App\Http\Controllers\CustomerController@logout')->name('logout');
+Route::post('/logout', '\App\Http\Controllers\CustomerController@logout')->name('logout');
 
 Route::get('/customerProfile', '\App\Http\Controllers\CustomerController@profile')->name('profile');
 

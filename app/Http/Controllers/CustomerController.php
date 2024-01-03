@@ -53,31 +53,6 @@ class CustomerController extends Controller
 
     }
 
-    // public function login(Request $request){
-
-    //     if ($request->isMethod('post')){
-    //         $email = $request->input('email');
-    //         $password = $request->input('password');
-    
-    //         $customers = Customer::where('Email', $email)->where('Password', $password);
-            
-            
-    //         if($customers->exists()){
-    //             $customer = $customers->first();
-    //             $request->session()->put('customer_id', $customer->id);
-    //             $request->session()->put('customer_name', $customer->Name);
-    //             $request->session()->put('customer_email', $customer->Email);
-    //             // $request->session()->put('customer_name', $customer->Name);
-    //             //$orders = Order::where('customerId', $customer->id);
-    //             return redirect()->route('profile', $customer->id);
-    //             // return redirect()->route('profile', ['customers'=> $customer, 'orders' => $orders]);
-    //         }
-    
-    //         return redirect()->route('login')->with('error', 'Invalid credentials');
-    
-    //     }
-    // }
-
     public function login(Request $request){
 
         if ($request->isMethod('post')){
@@ -93,7 +68,7 @@ class CustomerController extends Controller
                 $request->session()->put('customer_email', $customer->Name);
                 // $request->session()->put('customer_name', $customer->Name);
 
-                return redirect()->intended('customerProfile');
+                return redirect()->route('profile');
             }
     
             return redirect()->route('login')->with('error', 'Invalid credentials');
@@ -111,29 +86,12 @@ class CustomerController extends Controller
 
     public function profile(Request $request){
         if ($request->session()->has('customer_id')){
-            return view('customerProfile');
+            $orders = Order::where('customerId', $request->session()->get('customer_id'))->get();
+            $customer = Customer::find($request->session()->get('customer_id'))->first();
+            return view('customerProfile', ['orders'=> $orders, 'customer' => $customer ] );
         }
         return redirect('login')->with('error', 'Login Required'); 
     }
-
-    // public function logout(Request $request){
-    //     $request->session()->forget('customer_id');
-    //     $request->session()->forget('customer_email');
-    //     $request->session()->forget('customer_name');
-
-    //     return redirect('login')->with('error', 'Logged out');
-    // }
-
-    // public function profile(Request $request, $id){
-    //     if ($request->session()->has('customer_id')){
-    //         //$customer = Customer::find($id);
-    //         //$orders = Order::where('customerId', $id);
-    //         return view('customerProfile');
-    //         // return view('customerProfile' , ['customer' => $customer, 'orders' => $orders]);
-    //     }
-    //     return redirect('login')->with('error', 'Login Required'); 
-    // }
-
 
     // BUY PAGE
     public function showBuyPage() {
@@ -188,13 +146,30 @@ class CustomerController extends Controller
         if ($request->session()->has('customer_id')){
             $customerId = $request->session()->get('customer_id');
             $order->customerId = $customerId;
+
+            $customers = Customer::where( 'id', $customerId);
+            $customer = $customers->first();
+            $customer->ccName = $request->input('cc_name');
+            $customer->ccNumber = $request->input('cc_number');
+            $customer->ccExpiration = $request->input('cc_expiration');
+            $customer->save();
+
+            
         }
 
-        
         // Save the order to the database or perform other actions
         $order->save();
 
-        // Return a response if needed
+        $cart = json_decode($dataFromLocalStorage, true);
+        foreach( $cart as $item ){
+            $pid = $item[0];
+            $product = ProductModel::find($pid)->first();
+            $stock = $product->Quantity;
+            $qtyOrdered = $item[3];
+            $product->Quantity = $stock - $qtyOrdered;
+            $product->save();
+        }
+
         return redirect('buy');
     }
 

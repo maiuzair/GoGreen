@@ -1,8 +1,3 @@
-{{-- @extends('/index') --}}
-{{-- @extends('/resources/views/whyplants') --}}
-
-{{-- @extends('mainLayout') --}}
-
 @section('guestNav')
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="cart" viewBox="0 0 16 16">
@@ -37,7 +32,11 @@
                             <li><a class="dropdown-item" href="buy#succulents">Flowers</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="login">Login</a></li>
+                    @if(session('customer_email'))
+                        <li class="nav-item"><a class="nav-link" href="customerProfile">Profile</a></li>
+                    @else
+                        <li class="nav-item"><a class="nav-link" href="login">Login</a></li>
+                    @endif
                     <li></li>
 
 
@@ -63,4 +62,3 @@
             <div class="collapse navbar-collapse flex-grow-0 " tabindex="-1" id="navbarCollapse">
 
 @endsection
-

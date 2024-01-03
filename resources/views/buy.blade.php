@@ -1,5 +1,5 @@
 @extends('Layouts.mainLayout')
-@section('title', 'Why plants | Benefits')
+@section('title', 'Buy plants')
 
 
 @section('css')
@@ -92,12 +92,11 @@
             <div class="album py-5 bg-body-tertiary">
 
                 {{-- not zaruri --}}
-                <div class="container">
+                <div class="container-fluid">
 
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        <div class="col">
-
                             @foreach ($products[0] as $product)
+                            <div class="col">
                                 <div class="card shadow-sm" data-id="{{ $product->id }}" data-name="{{ $product->Name }}" data-price="{{ $product->Price }}">
                                     <img class="bd-placeholder-img card-img-top" width="100%" height="300"
                                         src="{{ asset($product->MainImage) }}" alt="Product image" />
@@ -113,9 +112,8 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             @endforeach
-
-                        </div>
                     </div>
                 </div>
         @endif
@@ -131,9 +129,8 @@
                 <div class="container">
 
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        <div class="col">
-
                             @foreach ($products[1] as $product)
+                            <div class="col">
                                 <div class="card shadow-sm" data-id="{{ $product->id }}" data-name="{{ $product->Name }}" data-price="{{ $product->Price }}">
                                     <img class="bd-placeholder-img card-img-top" width="100%" height="300"
                                         src="{{ asset($product->MainImage) }}" alt="Product image" />
@@ -148,9 +145,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                </div>
                             @endforeach
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -167,9 +163,8 @@
                 <div class="container">
 
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        <div class="col">
-
                             @foreach ($products[2] as $product)
+                            <div class="col">
                                 <div class="card shadow-sm" data-id="{{ $product->id }}" data-name="{{ $product->Name }}" data-price="{{ $product->Price }}">
                                     <img class="bd-placeholder-img card-img-top" width="100%" height="300"
                                         src="{{ asset($product->MainImage) }}" alt="Product image" />
@@ -185,9 +180,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                </div>
                             @endforeach
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -206,9 +200,8 @@
                 <div class="container">
 
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        <div class="col">
-
                             @foreach ($products[3] as $product)
+                            <div class="col">
                                 <div class="card shadow-sm" data-id="{{ $product->id }}" data-name="{{ $product->Name }}" data-price="{{ $product->Price }}">
                                     <img class="bd-placeholder-img card-img-top" width="100%" height="300"
                                         src="{{ asset($product->MainImage) }}" alt="Product image" />
@@ -224,9 +217,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                </div>
                             @endforeach
-
-                        </div>
                     </div>
                 </div>
             </div>

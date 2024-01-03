@@ -1,4 +1,5 @@
 @extends('Layouts.adminLayout')
+@section('title', 'Products')
 @section('admincontent')
     <style>
 

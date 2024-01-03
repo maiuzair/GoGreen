@@ -1,5 +1,5 @@
 @extends('Layouts.mainLayout')
-@section('title', 'Home')
+@section('title', 'Cart')
 @section('css')
     href={{ URL::asset('css/heroes.css')}}
 @endsection
@@ -45,7 +45,7 @@
         }
       }
       displayTotal();
-      alert("inc");
+      //alert("inc");
     }
 
     function decQty(button){
@@ -74,7 +74,7 @@
       }
 
       displayTotal();
-      alert("dec");
+      //alert("dec");
     }
 
     function calcTotal(){

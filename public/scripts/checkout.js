@@ -81,7 +81,7 @@ document.getElementById('list').innerHTML +=`
   </div>
   <span class="text-body-secondary" name="total">$${calcTotal()}</span>
   </li>
-`;
+`; 
 document.getElementById('cart-data').value = JSON.stringify(cart);
 //====================
 // Assume you have some data in localStorage

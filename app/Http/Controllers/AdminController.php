@@ -27,14 +27,7 @@ class AdminController extends Controller
 
     public function login(Request $request)
     {
-        // $credentials = $request->only('email', 'password');
 
-        // if (Auth::guard('admin')->attempt($credentials)) {
-            
-        //     return redirect()->intended('/dashboard');
-        // }
-
-        // return redirect()->route('admin.adminLogin')->with('error', 'Invalid credentials');
 
 
         if ($request->isMethod('post')){
@@ -187,7 +180,7 @@ class AdminController extends Controller
                 'quantity' => 'required|integer|min:1',
                 'category' => 'required',
                 'mainImage' => 'required|image',
-                'OtherImages.*' => 'nullable|image', // Apply image validation to each file in OtherImages
+                'OtherImages.*' => 'nullable|image', 
             ]);
 
             $product->Name = $request->input('productName');

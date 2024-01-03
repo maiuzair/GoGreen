@@ -100,7 +100,7 @@
                         healthier,
                         happier you.</p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                        <a href="whyplants.html">
+                        <a href="whyplants">
                             <button type="button" class="btn btn-primary btn-success btn-lg px-4 me-sm-3">Learn
                                 more</button>
                         </a>
@@ -109,7 +109,7 @@
             </div>
         </div>
 
-        <h1 class="display-4 fw-bold text-center text-body-emphasis"> Explore to our Green Oasis! </h1>
+        <h1 class="display-4 fw-bold text-center text-body-emphasis"> Explore our Green Oasis! </h1>
         <div class="px-4 pt-5 my-5 text-center border-bottom">
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
