@@ -71,8 +71,42 @@
                 @foreach ($products as $product)
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="card shadow-sm">
-                            <img class="bd-placeholder-img card-img-top" width="100%" height="300"
-                                src="{{ asset($product->MainImage) }}" alt="Product image" />
+                            {{-- <img class="bd-placeholder-img card-img-top" width="100%" height="300"
+                                src="{{ asset($product->MainImage) }}" alt="Product image" /> --}}
+                                <div id="carousel-{{ $product->id }}" class="carousel slide card shadow-sm" data-bs-ride="carousel" data-bs-interval="5000">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img class="bd-placeholder-img card-img-top" width="100%" height="300"
+                                                src="{{ asset($product->MainImage) }}" alt="Product image" />
+                                        </div>
+                                        @if ($product->OtherImages)
+                                            @php
+                                                $OtherImages = explode(',', $product->OtherImages);
+                                            @endphp
+                                            @foreach ($OtherImages as $image)
+                                                <div class="carousel-item">
+                                                    <img class="bd-placeholder-img card-img-top" width="100%" height="300"
+                                                        src="{{ asset(trim($image)) }}" alt="Product image" />
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
+
+                                    @if($product->OtherImages)
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ $product->id }}"
+                                        data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ $product->id }}"
+                                        data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                    @endif
+                                </div>
+                
+
 
                             <div class="card-body">
                                 <p class="card-text">{{ $product->Name }}</p>

@@ -88,7 +88,16 @@ document.getElementById('list').innerHTML +=`
 `; 
 
 document.getElementById('cart-data').value = JSON.stringify(cart);
-console.log(JSON.stringify(cart));
+
+// const cartData = localStorage.getItem('cart');
+// fetch('/app/Http/Controllers/CustomerController.php', {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify({ cart: cartData })
+// })
+
 //====================
 // Assume you have some data in localStorage
 // var myData = JSON.stringify(cart);

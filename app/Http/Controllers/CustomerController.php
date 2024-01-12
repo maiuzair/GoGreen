@@ -131,8 +131,9 @@ class CustomerController extends Controller
 
     public function confirmOrder(Request $request) {
         // Get the data from the hidden input field
+        
         $dataFromLocalStorage = $request->input('cart_data');
-
+        
         $b = $request->input('baddress');
         $s = $request->input('saddress');
 
@@ -162,6 +163,38 @@ class CustomerController extends Controller
 
         // Save the order to the database or perform other actions
         $order->save();
+
+        // Reduce stock
+        // 
+        
+        $carts = json_decode($dataFromLocalStorage, true);
+
+        // $cartData = json_decode($_POST['cart'], true);
+        //$cartData = json_decode( $request->input('cart'), true);
+        //dd($cartData);
+        // $carts = $cartData['cart'];
+        
+        // $requestBody = file_get_contents('php://input');
+        // $cartData = json_decode($requestBody, true);
+        // $carts = $cartData['cart'];
+
+        foreach ($carts as $usercart ){
+            if ($usercart[0] == 0){
+                //something
+            }
+            else if ($usercart[0] == $customerId){
+                $customerCart = $usercart;
+            }
+        }
+        // [ 1 , [pid, pname, pprice, pqty ]]
+        foreach( $customerCart[1] as $item ){
+            $pid = $item[0];
+            $product = ProductModel::find($pid);
+            $stock = $product->Quantity;
+            $qtyOrdered = $item[3];
+            $product->Quantity = $stock - $qtyOrdered;
+            $product->save();
+        }
 
         return redirect('buy');
     }
