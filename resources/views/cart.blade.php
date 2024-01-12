@@ -11,10 +11,19 @@
 
 @section('maincontent')
 
+<?php
+$id = 0; // guest user
+
+if (session()->has('customer_id')) {
+    $id = session('customer_id');
+}
+?>
+
 <!--==================================================MAIN-->
 <!-- <script src="{{URL::asset('scripts/script.js')}}"></script> -->
 
 <main>
+    <input type="hidden" value={{$id}} id="id">
     <div class="container col-xl-10 col-xxl-8 px-4 py-5">
     <h4 class="d-flex justify-content-between align-items-center mb-3">
       <span class="cart-heading">Your cart</span>
@@ -39,7 +48,9 @@
         if (cart[i][1] == name){
             cart[i][3] = cart[i][3]+1;
             button.previousElementSibling.value = cart[i][3];
-            localStorage.setItem('cart', JSON.stringify(cart));
+            userCart[1] = cart;
+            carts.splice(userCartIndex, 1, userCart);
+            localStorage.setItem('cart', JSON.stringify(carts));
             console.log(localStorage.getItem('cart'));
             break;
         }
@@ -66,7 +77,9 @@
             cart.splice(i,1);
           }
 
-          localStorage.setItem('cart', JSON.stringify(cart));
+          userCart[1] = cart;
+          carts.splice(userCartIndex, 1, userCart);
+          localStorage.setItem('cart', JSON.stringify(carts));
           console.log(localStorage.getItem('cart'));
           break;
 
@@ -100,7 +113,20 @@
       
     }
 
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    // function findProductInfo(){
+    //   const carts = JSON.parse(localStorage.getItem('cart')) || [];
+    //   var id = document.getElementById('id').value;
+    //   console.log(id);
+    //   userCartIndex = carts.findIndex( subarray => subarray[0] === id );
+    //   userCart = carts[userCartIndex];
+    //   return userCart[1];
+    // }
+    // var cart = findProductInfo();
+    const carts = JSON.parse(localStorage.getItem('cart')) || [];
+    var id =  parseInt(document.getElementById('id').value);
+    userCartIndex = carts.findIndex( subarray => subarray[0] === id );
+    userCart = carts[userCartIndex];
+    cart = userCart[1];
     cart.forEach(productInfo => {
         const productName = productInfo[1];
         const productPrice = productInfo[2];

@@ -28,7 +28,7 @@
                     <p><strong>Name:</strong> {{ $customer->Name }}</p>
                     <p><strong>Email:</strong> {{ $customer->Email }}</p>
                     <p><strong>Phone:</strong> {{ $customer->Phone }}</p>
-                    <p><strong>Address:</strong> {{ $customer->address }}</p>
+                    <p><strong>Address:</strong> {{ $customer->Address }}</p>
                 </div>
             </div>
         </div>

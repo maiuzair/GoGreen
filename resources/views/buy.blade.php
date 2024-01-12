@@ -8,10 +8,20 @@
 
 @section('maincontent')
 
+<?php
+$id = 0; // guest user
+
+if (session()->has('customer_id')) {
+    $id = session('customer_id');
+}
+?>
+
+
+
 <script src="{{URL::asset('scripts/cart.js')}}"></script>
     <!-- ===========================================Main -->
 
-
+{{-- <h1>{{$id}}</h1> --}}
 
     <!-- --------------------------------------Carousel -->
     <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
@@ -105,7 +115,7 @@
                                         <p class="card-text">{{ $product->Description }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="return addToCart(event)">Add to cart
+                                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="return addToCart(event , {{$id}})">Add to cart
                                                 </button>
                                             </div>
                                             <small class="text-body-secondary">${{ $product->Price }}</small>
@@ -139,7 +149,7 @@
                                         <p class="card-text">{{ $product->Description }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="return addToCart(event)">Add to cart </button>
+                                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="return addToCart(event , {{$id}})">Add to cart </button>
                                             </div>
                                             <small class="text-body-secondary">${{ $product->Price }}</small>
                                         </div>
@@ -173,7 +183,7 @@
                                         <p class="card-text">{{ $product->Description }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="return addToCart(event)">Add to
+                                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="return addToCart(event , {{$id}})">Add to
                                                     cart</button>
                                             </div>
                                             <small class="text-body-secondary">${{ $product->Price }}</small>
@@ -210,7 +220,7 @@
                                         <p class="card-text">{{ $product->Description }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="return addToCart(event)"> Add to
+                                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="return addToCart(event , {{$id}})"> Add to
                                                     cart</button>
                                             </div>
                                             <small class="text-body-secondary">${{ $product->Price }}</small>

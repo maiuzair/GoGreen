@@ -77,9 +77,11 @@ class CustomerController extends Controller
     }
 
     public function logout(Request $request){
+        //logger('Before logout: ' . print_r(session()->all(), true));
         $request->session()->forget('customer_id');
         $request->session()->forget('customer_email');
         $request->session()->forget('customer_name');
+        //logger('After logout: ' . print_r(session()->all(), true));
 
         return redirect('login')->with('error', 'Logged out');
     }
@@ -87,7 +89,8 @@ class CustomerController extends Controller
     public function profile(Request $request){
         if ($request->session()->has('customer_id')){
             $orders = Order::where('customerId', $request->session()->get('customer_id'))->get();
-            $customer = Customer::find($request->session()->get('customer_id'))->first();
+            $customer = Customer::where('id', $request->session()->get('customer_id'))->first();
+            //logger('customer name: ' . print_r(session()->all(), true));
             return view('customerProfile', ['orders'=> $orders, 'customer' => $customer ] );
         }
         return redirect('login')->with('error', 'Login Required'); 
@@ -159,16 +162,6 @@ class CustomerController extends Controller
 
         // Save the order to the database or perform other actions
         $order->save();
-
-        $cart = json_decode($dataFromLocalStorage, true);
-        foreach( $cart as $item ){
-            $pid = $item[0];
-            $product = ProductModel::find($pid)->first();
-            $stock = $product->Quantity;
-            $qtyOrdered = $item[3];
-            $product->Quantity = $stock - $qtyOrdered;
-            $product->save();
-        }
 
         return redirect('buy');
     }

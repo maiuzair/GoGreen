@@ -23,7 +23,7 @@
         
           <div class="col-md-7 col-lg-8">
           <h4 class="mb-3">Billing address</h4>
-          <form  action="checkout" method="post" enctype="multipart/form-data">
+          <form  action="checkout" method="post" onsubmit="checkout()" enctype="multipart/form-data">
           <input type="hidden" id="cart-data" name="cart_data" value="">
             @csrf
           @if(isset($customer))

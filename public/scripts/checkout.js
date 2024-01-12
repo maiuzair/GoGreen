@@ -18,6 +18,10 @@
   })
 })()
 
+function checkout(){
+  localStorage.removeItem('cart');
+}
+
 var checkbox = document.getElementById('same-address');
 var addressInput = document.getElementById('ship-address');
 addressInput.disabled = checkbox.checked;
@@ -82,7 +86,9 @@ document.getElementById('list').innerHTML +=`
   <span class="text-body-secondary" name="total">$${calcTotal()}</span>
   </li>
 `; 
+
 document.getElementById('cart-data').value = JSON.stringify(cart);
+console.log(JSON.stringify(cart));
 //====================
 // Assume you have some data in localStorage
 // var myData = JSON.stringify(cart);
