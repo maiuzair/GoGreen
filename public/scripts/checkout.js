@@ -47,7 +47,18 @@ cod.addEventListener('change', function(){
   cvv.disabled = cod.checked;
 });
 
-const cart = JSON.parse(localStorage.getItem('cart')) || [];
+const carts = JSON.parse(localStorage.getItem('cart')) || [];
+id = document.getElementById("firstName").dataset.id;
+userCart=[];
+userCartIndex = carts.findIndex( subarray => subarray[0] === id );
+if (userCartIndex != -1 ){
+  userCart = carts[userCartIndex];
+}
+else{
+  userCart = carts[0];
+}
+console.log(userCart);
+const cart = userCart[1];
 
 function calcTotal(){
   total = 0;

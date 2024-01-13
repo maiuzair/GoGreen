@@ -30,7 +30,7 @@
             <div class="row g-3">
               <div class="col-sm-6">
                 <label for="firstName" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="firstName" value="{{$customer->Name}}" />
+                <input type="text" class="form-control" id="firstName" data-id="{{$customer->id}}" value="{{$customer->Name}}" />
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
@@ -64,7 +64,7 @@
             <div class="row g-3">
               <div class="col-sm-6">
                 <label for="firstName" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="firstName"required>
+                <input type="text" class="form-control" id="firstName" data-id="0" required>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
