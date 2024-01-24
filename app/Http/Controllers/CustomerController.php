@@ -164,9 +164,7 @@ class CustomerController extends Controller
         // Save the order to the database or perform other actions
         $order->save();
 
-        // Reduce stock
-        // 
-        
+       
         $carts = json_decode($dataFromLocalStorage, true);
 
         // $cartData = json_decode($_POST['cart'], true);
@@ -177,10 +175,10 @@ class CustomerController extends Controller
         // $requestBody = file_get_contents('php://input');
         // $cartData = json_decode($requestBody, true);
         // $carts = $cartData['cart'];
-
+        $customerCart = [[]];
         foreach ($carts as $usercart ){
             if ($usercart[0] == 0){
-                //something
+                $customerCart = $carts[0];
             }
             else if ($usercart[0] == $customerId){
                 $customerCart = $usercart;
@@ -196,7 +194,7 @@ class CustomerController extends Controller
             $product->save();
         }
 
-        return redirect('buy');
-    }
+         return redirect('buy');
+     }
 
 }
