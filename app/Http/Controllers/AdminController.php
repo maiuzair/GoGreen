@@ -13,12 +13,12 @@ use App\Models\Admin;
 use App\Models\ProductModel;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests; 
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class AdminController extends Controller
 {
     use AuthorizesRequests, ValidatesRequests;
-    
+
     public function showLoginForm()
     {
         return view('adminLogin');
@@ -33,7 +33,7 @@ class AdminController extends Controller
         if ($request->isMethod('post')){
             $username = $request->input('username');
             $password = $request->input('password');
-    
+
             $admins = Admin::where('Username', $username)->where('Password', $password);
             if($admins->exists()){
                 $admin = $admins->first();
@@ -41,9 +41,9 @@ class AdminController extends Controller
                 $request->session()->put('Username', $admin->Username);
                 return redirect()->intended('dashboard');
             }
-    
+
             return redirect()->route('adminLogin')->with('error', 'Invalid credentials');
-    
+
         }
     }
 
@@ -61,8 +61,8 @@ class AdminController extends Controller
             // $email = $request->session()->get('email');
             return view('dashboard', ['email' => session()->get('admin_Id'), 'name' => session()->get('Username')]);
         }
-        else 
-            return redirect('adminLogin')->with('error', 'Login Required'); 
+        else
+            return redirect('adminLogin')->with('error', 'Login Required');
     }
 
     public function viewProducts(Request $request) {
@@ -70,8 +70,8 @@ class AdminController extends Controller
             $products = ProductModel::all();
             return view('products', ['products' => $products]);
         }
-        else 
-            return redirect('adminLogin')->with('error', 'Login Required'); 
+        else
+            return redirect('adminLogin')->with('error', 'Login Required');
     }
 
 
@@ -89,8 +89,8 @@ class AdminController extends Controller
         if ($request->session()->has('admin_Id') && $request->session()->has('Username')){
             return view('addProduct', ['email' => session()->get('admin_Id'), 'name' => session()->get('Username')]);
         }
-        else 
-            return redirect('adminLogin')->with('error', 'Login Required'); 
+        else
+            return redirect('adminLogin')->with('error', 'Login Required');
     }
 
     public function addProduct(Request $request) {
@@ -132,15 +132,15 @@ class AdminController extends Controller
                 $product->OtherImages = implode(',', $otherImagePaths);
 
             }
-        
+
             $product->save();
 
             return redirect('products')->with('message', 'Product added successfully!');
-        
+
         }
 
-        else 
-            return redirect('adminLogin')->with('error', 'Login Required'); 
+        else
+            return redirect('adminLogin')->with('error', 'Login Required');
     }
 
     public function getProducts(Request $request) {
@@ -166,8 +166,8 @@ class AdminController extends Controller
         if ($request->session()->has('admin_Id') && $request->session()->has('Username')){
             return view('editProduct',['product' => $product]);
         }
-        else 
-            return redirect('adminLogin')->with('error', 'Login Required'); 
+        else
+            return redirect('adminLogin')->with('error', 'Login Required');
     }
 
     public function editProduct(Request $request, $id){
@@ -180,7 +180,7 @@ class AdminController extends Controller
                 'quantity' => 'required|integer|min:1',
                 'category' => 'required',
                 'mainImage' => 'required|image',
-                'OtherImages.*' => 'nullable|image', 
+                'OtherImages.*' => 'nullable|image',
             ]);
 
             $product->Name = $request->input('productName');
@@ -207,15 +207,15 @@ class AdminController extends Controller
                 $product->OtherImages = implode(',', $otherImagePaths);
 
             }
-        
+
             $product->save();
 
             return redirect('products')->with('message', 'Product edited successfully!');
-        
+
         }
 
-        else 
-            return redirect('adminLogin')->with('error', 'Login Required'); 
+        else
+            return redirect('adminLogin')->with('error', 'Login Required');
 
     }
 

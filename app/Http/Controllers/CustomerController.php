@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests; 
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 // MODELS
 use App\Models\Customer;
@@ -40,7 +40,7 @@ class CustomerController extends Controller
             'password' => 'required',
             'phone' => 'required',
             'address' => 'required',
-            
+
         ]);
 
         $customer->Name = $request['name'];
@@ -58,9 +58,9 @@ class CustomerController extends Controller
         if ($request->isMethod('post')){
             $email = $request->input('email');
             $password = $request->input('password');
-    
+
             $customers = Customer::where('Email', $email)->where('Password', $password);
-            
+
             if($customers->exists()){
                 $customer = $customers->first();
                 $request->session()->put('customer_id', $customer->id);
@@ -70,9 +70,9 @@ class CustomerController extends Controller
 
                 return redirect()->route('profile');
             }
-    
+
             return redirect()->route('login')->with('error', 'Invalid credentials');
-    
+
         }
     }
 
@@ -93,7 +93,7 @@ class CustomerController extends Controller
             //logger('customer name: ' . print_r(session()->all(), true));
             return view('customerProfile', ['orders'=> $orders, 'customer' => $customer ] );
         }
-        return redirect('login')->with('error', 'Login Required'); 
+        return redirect('login')->with('error', 'Login Required');
     }
 
     // BUY PAGE
@@ -101,13 +101,13 @@ class CustomerController extends Controller
 
         $productModel = new ProductModel();
 
-        $cateogory = ["Indoor","Outdoor","Succulents","Flower"]; 
+        $cateogory = ["Indoor","Outdoor","Succulents","Flower"];
         $products = [];
         for($i = 0; $i < count($cateogory); $i++){
             $products[$i] = $productModel->getProductByCategory($cateogory[$i]);
         }
 
-        return view('buy', ['products' => $products]);   
+        return view('buy', ['products' => $products]);
     }
 
     public function searchProduct($term) {
@@ -131,9 +131,9 @@ class CustomerController extends Controller
 
     public function confirmOrder(Request $request) {
         // Get the data from the hidden input field
-        
+
         $dataFromLocalStorage = $request->input('cart_data');
-        
+
         $b = $request->input('baddress');
         $s = $request->input('saddress');
 
@@ -158,20 +158,20 @@ class CustomerController extends Controller
             $customer->ccExpiration = $request->input('cc_expiration');
             $customer->save();
 
-            
+
         }
 
         // Save the order to the database or perform other actions
         $order->save();
 
-       
+
         $carts = json_decode($dataFromLocalStorage, true);
 
         // $cartData = json_decode($_POST['cart'], true);
         //$cartData = json_decode( $request->input('cart'), true);
         //dd($cartData);
         // $carts = $cartData['cart'];
-        
+
         // $requestBody = file_get_contents('php://input');
         // $cartData = json_decode($requestBody, true);
         // $carts = $cartData['cart'];
@@ -185,16 +185,31 @@ class CustomerController extends Controller
             }
         }
         // [ 1 , [pid, pname, pprice, pqty ]]
-        foreach( $customerCart[1] as $item ){
-            $pid = $item[0];
+
+        // foreach( $customerCart as $item ){
+        //     if( is_int($item) ){
+        //         continue;
+        //     }
+        //     $pid = $item[0];
+        //     $product = ProductModel::find($pid);
+        //     $stock = $product->Quantity;
+        //     $qtyOrdered = $item[3];
+        //     $product->Quantity = $stock - $qtyOrdered;
+        //     $product->save();
+        // }
+
+        for ($i = 1; $i < count($customerCart); $i++) {
+
+            $pid = $customerCart[$i][0];
             $product = ProductModel::find($pid);
             $stock = $product->Quantity;
-            $qtyOrdered = $item[3];
+            $qtyOrdered = $customerCart[$i][3];
             $product->Quantity = $stock - $qtyOrdered;
             $product->save();
+
         }
 
-         return redirect('buy');
+        return redirect('buy');
      }
 
 }
