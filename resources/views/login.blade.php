@@ -1,4 +1,4 @@
-@extends('Layouts.mainlayout')
+@extends('Layouts.mainLayout')
 @section('title', 'Login')
 @section('css')
     href={{ URL::asset('css/heroes.css') }}
