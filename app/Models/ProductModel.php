@@ -8,19 +8,28 @@ use Illuminate\Database\Eloquent\Model;
 class ProductModel extends Model
 {
     use HasFactory;
-    protected $table = "products";
-    // protected $primaryKey = 'your_primary_key_column_name';
+
+    protected $table = 'products';
     public $timestamps = false;
 
-    public function getProductByName($product) {
-        $product = ProductModel::where('name', $productName)->first();
-        return $product;
+    protected $fillable = [
+        'Name',
+        'Description',
+        'Price',
+        'Quantity',
+        'Category',
+        'MainImage',
+        'OtherImages'
+    ];
+
+    public function getProductByName($productName)
+    {
+        return self::where('Name', $productName)->first();
     }
 
-    public function getProductByCategory($category) {
-        $products = ProductModel::where('category', 'LIKE', "%{$category}%")->get();
-        return $products;
+    public function getProductByCategory($category)
+    {
+        return self::where('Category', 'LIKE', "%{$category}%")->get();
     }
-
-
 }
+

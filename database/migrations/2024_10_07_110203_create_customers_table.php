@@ -17,7 +17,7 @@ class CreateCustomersTable extends Migration
             $table->increments('id');
             $table->string('Name', 255);
             $table->string('Email', 30);
-            $table->string('Password', 10);
+            $table->string('Password', 255);
             $table->string('Phone', 20)->nullable();
             $table->text('Address')->nullable();
             $table->string('ccName', 30)->nullable();
